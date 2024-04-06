@@ -3,6 +3,7 @@ title: "Project-1-source-code"
 output: html_document
 date: "2024-04-02"
 ---
+## Preparing task
 Use the library
 ```{r}
 # All packages used in this script:
@@ -14,10 +15,33 @@ library(ggrepel)
 library(readr)
 ```
 
+Load the data 
 ```{r}
 tornados <- read_csv("data/tornados.csv")
 
 view(tornados)
+```
+
+** Common Utils **
+Create a theme
+```{r}
+theme_1b <- function() {
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    panel.grid.major.y = element_line(color = "grey80"),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.x = element_line(color = "grey80"),
+    panel.grid.minor.x = element_blank(),
+    axis.title.x = element_text(size = 12, hjust = 0.5),
+    axis.title.y = element_text(size = 12, hjust = 0.5),
+  )
+}
+```
+
+Color palette
+```{r}
+# ADD CODE HERE
+
 ```
 
 ## Question 1
@@ -53,21 +77,6 @@ combined_data <- tornados %>%
   arrange(desc(fatality_rate)) 
 
 view(combined_data)
-```
-
-Create a theme
-```{r}
-theme_1b <- function() {
-  theme(
-    plot.title = element_text(hjust = 0.5),
-    panel.grid.major.y = element_line(color = "grey80"),
-    panel.grid.minor.y = element_blank(),
-    panel.grid.major.x = element_line(color = "grey80"),
-    panel.grid.minor.x = element_blank(),
-    axis.title.x = element_text(size = 12, hjust = 0.5),
-    axis.title.y = element_text(size = 12, hjust = 0.5),
-  )
-}
 ```
 
 ```{r}
