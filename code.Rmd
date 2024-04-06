@@ -32,6 +32,15 @@ tornados <- read_csv("data/tornados.csv")
 #view(tornados)
 ```
 
+Preprocess data
+```{r}
+# Filter out Alaska and Hawaii. These two states do not follow the common path with other states in the US.
+tornados <- tornados |>
+  filter(
+    !st %in% c("HI", "AK"),
+    slat > 25
+  )
+```
 ** Common Utils **
 Create a theme
 ```{r}
