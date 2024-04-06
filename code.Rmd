@@ -16,6 +16,7 @@ library(ggplot2)
 library(dplyr)
 library(ggrepel)
 library(readr)
+library(showtext)
 ```
 
 Load the data 
@@ -28,6 +29,10 @@ view(tornados)
 ** Common Utils **
 Create a theme
 ```{r}
+font_add_google("Montserrat", "Montserrat")
+showtext_auto()
+main_font = "Montserrat"
+
 theme_1b <- function() {
   theme(
     plot.title = element_text(hjust = 0.5),
