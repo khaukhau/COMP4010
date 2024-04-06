@@ -92,7 +92,7 @@ theme_1c <- function() {
 
 Color palette
 ```{r}
-pal <- c('#00202e', '#003f5c', '#2c4875', '#8a508f', '#bc5090', '#ff6361', '#ff8531', '#ffa600', '#ffd380')
+pal <- c('#00202e', '#003f5c', '#2c4875', '#8a508f', '#bc5090', '#ff6361', '#ff8531', '#ffa600', '#ffd380','#35A29F')
 
 pal_2 <- c('#D14D72', '#FFABAB', '#FCC8D1', '#FEF2F4')
 pal_3 <- c('#071952', '#0B666A', '#35A29F', '#97FEED')
@@ -261,7 +261,7 @@ combined_data <- combined_data %>%
 
 ```{r}
 # Choose the color for the tornado range
-colors <- c("0-999" = pal_3[3], "1000-1999" = pal[9], "2000-2999" = pal[7], "3000-3999" = pal[2], "4000+" = pal[6])
+colors <- c("0-999" = pal[10], "1000-1999" = pal[9], "2000-2999" = pal[7], "3000-3999" = pal[2], "4000+" = pal[6])
 
 # Create the bubble chart
 bubble_chart <- ggplot(combined_data, aes(x = number_of_fatalities, y = number_of_injuries, size = number_of_tornados, color = tornado_color_factor)) +
