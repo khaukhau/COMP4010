@@ -5,9 +5,7 @@ date: "2024-04-02"
 ---
 ## Preparing task
 
-```{r}
-install.packages("languageserver")
-```
+Delete sth here
 
 Use the library
 ```{r}
