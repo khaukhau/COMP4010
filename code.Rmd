@@ -131,7 +131,6 @@ combined_plot <- plot_occurrences / plot_mag / plot_width / plot_length
 ggsave("combined_plots_2.png", combined_plot, width = 10, height = 15, dpi = 300, bg = "white")
 ```
 
-```
 
 ## Question 2
 
@@ -167,7 +166,7 @@ view(combined_data)
 
 ```{r}
 
-colors <- c("0-999" = "lightblue", "1000-1999" = "darkgreen", "2000-2999" = "darkorange", "3000-3999" = "grey", "4000+" = "red")
+colors <- c("0-999" = pal[1], "1000-1999" = pal[2], "2000-2999" = pal[3], "3000-3999" = pal[4], "4000+" = pal[5])
 
 # Create the bubble chart
 bubble_chart <- ggplot(combined_data, aes(x = number_of_fatalities, y = number_of_injuries, size = number_of_tornados, color = tornado_color_factor)) +
