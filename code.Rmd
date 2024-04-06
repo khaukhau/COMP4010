@@ -17,13 +17,15 @@ library(dplyr)
 library(ggrepel)
 library(readr)
 library(showtext)
+library(gridExtra)
+library(patchwork)
 ```
 
 Load the data 
 ```{r}
 tornados <- read_csv("data/tornados.csv")
 
-view(tornados)
+#view(tornados)
 ```
 
 ** Common Utils **
@@ -61,7 +63,7 @@ data <- tornados
 
 # Mini Question 2
 ```{r}
-data_1b <- data.frame(tornado_data)
+data_1b <- data.frame(tornados)
 
 data_1b$mag <- as.numeric(as.character(data_1b$mag))
 
