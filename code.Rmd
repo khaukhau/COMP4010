@@ -64,13 +64,13 @@ theme_1b <- function() {
     base_rect_size = 11/22
   ) + 
   theme(
-    plot.title = element_text(hjust = 0.5),
+    plot.title = element_text(hjust = 0.5, face = "bold"),
     panel.grid.major.y = element_line(color = "grey80"),
     panel.grid.minor.y = element_blank(),
     panel.grid.major.x = element_line(color = "grey80"),
     panel.grid.minor.x = element_blank(),
-    axis.title.x = element_text(size = 12, hjust = 0.5),
-    axis.title.y = element_text(size = 12, hjust = 0.5),
+    axis.title.x = element_text(size = 12, hjust = 0.5, face = "bold"),
+    axis.title.y = element_text(size = 12, hjust = 0.5, face = "bold"),
   )
 }
 
@@ -102,7 +102,7 @@ pal <- c('#00202e', '#003f5c', '#2c4875', '#8a508f', '#bc5090', '#ff6361', '#ff8
 
 pal_2 <- c('#D14D72', '#FFABAB', '#FCC8D1', '#FEF2F4')
 pal_3 <- c('#071952', '#0B666A', '#35A29F', '#97FEED')
-pal_4 <- c("#2c4875", "#8a508f", "#bc5090", "#ff6361", "#ff8531", "#ffa600", "#ffd380")
+pal_4 <- c("#1d4877", "#1b8a5a", "#fbb021", "#f68838", "#ee3e32")
 pal_4 <- c(NA, colorRampPalette(pal_4)(13))
 pal_5 <- c('', '', '', '')
 ```
