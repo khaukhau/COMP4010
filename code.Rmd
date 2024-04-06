@@ -352,7 +352,9 @@ economic_impact <- ggplot(data = long_df, aes(x = decade, y = count, fill = cate
   theme(
     axis.title.x = element_text(face = "bold"),
     axis.title.y = element_text(face = "bold"),
-    legend.title = element_text(face = "bold")
+    legend.title = element_text(face = "bold"),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank()
   )
 economic_impact
 ```
