@@ -40,8 +40,7 @@ theme_1b <- function() {
 
 Color palette
 ```{r}
-# ADD CODE HERE
-
+pal <- c('#00202e', '#003f5c', '#2c4875', '#8a508f', '#bc5090', '#ff6361', '#ff8531', '#ffa600', '#ffd380')
 ```
 
 ## Question 1
@@ -55,8 +54,80 @@ Color palette
 
 # Mini Question 2
 ```{r}
-# ADD YOUR CODE
+data_1b <- data.frame(tornado_data)
 
+data_1b$mag <- as.numeric(as.character(data_1b$mag))
+
+yearly_count <- data_1b %>%
+  group_by(yr) %>%
+  summarise(TotalTornadoes = n())
+
+# Define a function to calculate mode
+get_mode <- function(v) {
+  uniqv <- unique(na.omit(v))
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
+# Summarizing the data by year
+yearly_summary <- data_1b %>%
+  group_by(yr) %>%
+  summarise(
+    AverageMag = mean(mag, na.rm = TRUE),
+    AverageWidth = median(wid, na.rm = TRUE),
+    AverageLength = median(len, na.rm = TRUE)
+  )
+
+special_year <- c(1974, 2011, 2020)
+
+plot_occurrences <- ggplot(yearly_count, aes(x = yr, y = TotalTornadoes)) +
+  geom_line(color = pal[2]) +
+  geom_vline(xintercept = special_year, linetype = 2) +
+  labs(title = "Total Yearly Tornado Occurrences",
+       x = "Year",
+       y = "Number of Tornadoes") +
+  theme_minimal() +
+  theme_1b()
+
+# Creating three separate plots
+plot_mag <- ggplot(yearly_summary, aes(x = yr, y = AverageMag)) +
+  geom_line(color = pal[4]) +
+  geom_vline(xintercept = special_year, linetype = 2) +
+  annotate("text", x = 2011, y = 1.2, label = "2011 Super Outbreak", angle = 90, vjust = -0.5) +
+  annotate("text", x = 1974, y = 0.8, label = "1974 Super Outbreak", angle = 90, vjust = -0.5) +
+  annotate("text", x = 2020, y = 1.2, label = "2020 Easter Tornado Outbreak", angle = 90, vjust = -0.5) +
+  labs(title = "Annual Changes in Average Tornado Magnitude",
+       x = "Year",
+       y = "Average Magnitude") +
+  theme_minimal() +
+  theme_1b()
+
+plot_width <- ggplot(yearly_summary, aes(x = yr, y = AverageWidth)) +
+  geom_line(color = pal[6]) +
+    geom_vline(xintercept = special_year, linetype = 2) +
+  labs(title = "Annual Changes in Average Tornado Width",
+       x = "Year",
+       y = "Average Width (yards)") +
+  theme_minimal() +
+  theme_1b()
+
+plot_length <- ggplot(yearly_summary, aes(x = yr, y = AverageLength)) +
+  geom_line(color = pal[8]) +
+  geom_vline(xintercept = special_year, linetype = 2) +
+  labs(title = "Annual Changes in Average Tornado Length",
+       x = "Year",
+       y = "Average Length (miles)") +
+  theme_minimal() +
+  theme_1b()
+
+# Arranging the plots in a grid
+grid.arrange(plot_occurrences, plot_mag, plot_width, plot_length, ncol = 1)
+
+# Combine the plots
+combined_plot <- plot_occurrences / plot_mag / plot_width / plot_length 
+
+# Save the combined plot as a single image
+ggsave("combined_plots_2.png", combined_plot, width = 10, height = 15, dpi = 300, bg = "white")
+```
 
 ```
 
