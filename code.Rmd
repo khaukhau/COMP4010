@@ -68,6 +68,7 @@ theme_1b <- function() {
     panel.grid.minor.x = element_blank(),
     axis.title.x = element_text(size = 12, hjust = 0.5, face = "bold"),
     axis.title.y = element_text(size = 12, hjust = 0.5, face = "bold"),
+    legend.title = element_text(face = "bold")
   )
 }
 
