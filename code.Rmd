@@ -4,6 +4,11 @@ output: html_document
 date: "2024-04-02"
 ---
 ## Preparing task
+
+```{r}
+install.packages("languageserver")
+```
+
 Use the library
 ```{r}
 # All packages used in this script:
@@ -49,8 +54,7 @@ Color palette
 # Mini Question 1
 ```{r}
 # ADD YOUR CODE
-
-
+data <- tornados
 ```
 
 # Mini Question 2
