@@ -296,6 +296,62 @@ bubble_chart
 
 ```{r}
 # ADD YOUR CODE
+# Create a new variable for decade
+new_df <- tornados %>%
+  mutate(decade = paste0(substr(yr, 1, 3), "0s")) %>%
+  select(decade, loss) %>%
+  group_by(decade) %>%
+  summarise(
+    loss_6 = sum(loss >= 1e6 & loss < 1e7, na.rm = TRUE),
+    loss_7 = sum(loss >= 1e7 & loss < 1e8, na.rm = TRUE),
+    loss_8 = sum(loss >= 1e8, na.rm = TRUE)
+  )
 
+# Display the resulting dataframe
+new_df
 
+# Crete long df
+long_df <- new_df %>%
+  pivot_longer(
+    cols = -decade, # Selects all columns except 'decade'
+    names_to = "category",
+    values_to = "count"
+  )
+
+colors <- c(
+  "loss_6" = pal[9],
+  "loss_7" = pal[7],
+  "loss_8" = pal[6]
+)
+
+long_df
+
+# Create bar chart
+economic_impact <- ggplot(data = long_df, aes(x = decade, y = count, fill = category)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = count), position = position_dodge(width = 0.9), vjust = -0.5, size = 2.5) +
+  labs(
+    x = "Decade", y = "No. of Tornados",
+    title = "Number of US tornados by loss range (in US dollar)"
+  ) +
+  scale_fill_manual(
+    values = colors,
+    labels = c(
+      "loss_6" = "Loss 1-10 million dollar",
+      "loss_7" = "Loss 10-100 million dollar",
+      "loss_8" = "Loss over 100 million dollar"
+    ),
+    name = "Type of tornados"
+  ) +
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0)),
+    limits = c(0, 700)
+  ) +
+  theme_1b() +
+  theme(
+    axis.title.x = element_text(face = "bold"),
+    axis.title.y = element_text(face = "bold"),
+    legend.title = element_text(face = "bold")
+  )
+economic_impact
 ```
