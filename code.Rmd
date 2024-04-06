@@ -14,21 +14,15 @@ library(dplyr)
 library(ggrepel)
 library(readr)
 library(showtext)
-
 #install.packages("janitor")
 library(janitor)
-
 library(glue)
 library(ggtext)
-
 #install.packages("maps")
 library(mapdata)
-
 library(biscale)
-
 #install.packages("gridExtra")
 library(gridExtra)
-
 #install.packages("patchwork")
 library(patchwork)
 ```
@@ -36,8 +30,6 @@ library(patchwork)
 Load the data 
 ```{r}
 tornados <- read_csv("data/tornados.csv")
-
-#view(tornados)
 ```
 
 Preprocess data
@@ -49,7 +41,9 @@ tornados <- tornados |>
     slat > 25
   )
 ```
+
 ** Common Utils **
+
 Create a theme
 ```{r}
 font_add_google("DM Sans", "DM Sans")
@@ -101,18 +95,14 @@ Color palette
 ```{r}
 pal <- c('#00202e', '#003f5c', '#2c4875', '#8a508f', '#bc5090', '#ff6361', '#ff8531', '#ffa600', '#ffd380','#35A29F')
 
-pal_2 <- c('#D14D72', '#FFABAB', '#FCC8D1', '#FEF2F4')
-pal_3 <- c('#071952', '#0B666A', '#35A29F', '#97FEED')
 pal_4 <- c("#1d4877", "#1b8a5a", "#fbb021", "#f68838", "#ee3e32")
 pal_4 <- c(NA, colorRampPalette(pal_4)(13))
-pal_5 <- c('', '', '', '')
 ```
 
 ## Question 1
 
 # Mini Question 1
 ```{r}
-# ADD YOUR CODE
 bg <- "white"
 
 # Create a US map
@@ -275,8 +265,7 @@ bubble_chart <- ggplot(combined_data, aes(x = number_of_fatalities, y = number_o
   theme (
     axis.text = element_text(color = "black"),
     panel.grid.major = element_line(color = "#E5E5E5"),
-    panel.grid.minor = element_line(color = "#E5E5E5"),
-    legend.title = element_text(face = "bold")
+    panel.grid.minor = element_line(color = "#E5E5E5")
   ) 
 
 # Display the plot
@@ -287,7 +276,6 @@ bubble_chart
 ## Mini Question 2
 
 ```{r}
-# ADD YOUR CODE
 # Create a new variable for decade
 new_df <- tornados %>%
   mutate(decade = paste0(substr(yr, 1, 3), "0s")) %>%
