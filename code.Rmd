@@ -106,6 +106,8 @@ pal_5 <- c('', '', '', '')
 ```{r}
 # ADD YOUR CODE
 data <- tornados
+
+#test 2
 ```
 
 # Mini Question 2
