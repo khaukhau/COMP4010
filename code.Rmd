@@ -35,9 +35,9 @@ tornados <- read_csv("data/tornados.csv")
 ** Common Utils **
 Create a theme
 ```{r}
-font_add_google("Montserrat", "Montserrat")
+font_add_google("DM Sans", "DM Sans")
 showtext_auto()
-main_font = "Montserrat"
+main_font = "DM Sans"
 
 theme_1b <- function() {
   theme_minimal(
@@ -56,6 +56,29 @@ theme_1b <- function() {
     axis.title.y = element_text(size = 12, hjust = 0.5),
   )
 }
+
+theme_1c <- function() {
+    theme_minimal(
+    base_family = main_font,
+    base_size = 11,
+    base_line_size = 11/22,
+    base_rect_size = 11/22
+  ) + 
+  theme(
+    plot.title = element_text(size = 40, hjust = 0.5),
+    #panel.grid.major.y = element_line(color = "grey80"),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    #panel.grid.major.x = element_line(color = "grey80"),
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    axis.title.x = element_text(size = 40, hjust = 0.5),
+    axis.title.y = element_text(size = 40, hjust = 0.5),
+    axis.text.x = element_text(size = 20),
+    axis.text.y = element_text(size = 24)
+  )
+}
+
 ```
 
 Color palette
@@ -99,44 +122,40 @@ yearly_summary <- data_1b %>%
 special_year <- c(1974, 2011, 2020)
 
 plot_occurrences <- ggplot(yearly_count, aes(x = yr, y = TotalTornadoes)) +
-  geom_line(color = pal[2]) +
+  geom_line(size = 1, color = pal[2]) +
   geom_vline(xintercept = special_year, linetype = 2) +
   labs(title = "Total Yearly Tornado Occurrences",
        x = "Year",
        y = "Number of Tornadoes") +
-  theme_minimal() +
-  theme_1b()
+  theme_1c()
 
 # Creating three separate plots
 plot_mag <- ggplot(yearly_summary, aes(x = yr, y = AverageMag)) +
-  geom_line(color = pal[4]) +
+  geom_line(size = 1, color = pal[4]) +
   geom_vline(xintercept = special_year, linetype = 2) +
-  annotate("text", x = 2011, y = 1.2, label = "2011 Super Outbreak", angle = 90, vjust = -0.5) +
-  annotate("text", x = 1974, y = 0.8, label = "1974 Super Outbreak", angle = 90, vjust = -0.5) +
-  annotate("text", x = 2020, y = 1.2, label = "2020 Easter Tornado Outbreak", angle = 90, vjust = -0.5) +
+  annotate("text", x = 2011, y = 1.2, size = 12, label = "2011 Super Outbreak", angle = 90, vjust = -0.5) +
+  annotate("text", x = 1974, y = 0.8, size = 12, label = "1974 Super Outbreak", angle = 90, vjust = -0.5) +
+  annotate("text", x = 2020, y = 1.2, size = 12, label = "2020 Easter Tornado Outbreak", angle = 90, vjust = -0.5) +
   labs(title = "Annual Changes in Average Tornado Magnitude",
        x = "Year",
        y = "Average Magnitude") +
-  theme_minimal() +
-  theme_1b()
+  theme_1c()
 
 plot_width <- ggplot(yearly_summary, aes(x = yr, y = AverageWidth)) +
-  geom_line(color = pal[6]) +
+  geom_line(size = 1, color = pal[6]) +
     geom_vline(xintercept = special_year, linetype = 2) +
   labs(title = "Annual Changes in Average Tornado Width",
        x = "Year",
        y = "Average Width (yards)") +
-  theme_minimal() +
-  theme_1b()
+  theme_1c()
 
 plot_length <- ggplot(yearly_summary, aes(x = yr, y = AverageLength)) +
-  geom_line(color = pal[8]) +
+  geom_line(size = 1, color = pal[8]) +
   geom_vline(xintercept = special_year, linetype = 2) +
   labs(title = "Annual Changes in Average Tornado Length",
        x = "Year",
        y = "Average Length (miles)") +
-  theme_minimal() +
-  theme_1b()
+  theme_1c()
 
 # Arranging the plots in a grid
 grid.arrange(plot_occurrences, plot_mag, plot_width, plot_length, ncol = 1)
