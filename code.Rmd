@@ -17,6 +17,11 @@ library(dplyr)
 library(ggrepel)
 library(readr)
 library(showtext)
+library(janitor)
+library(glue)
+library(ggtext)
+library(mapdata)
+library(biscale)
 
 #install.packages("gridExtra")
 library(gridExtra)
@@ -128,23 +133,20 @@ df_base_labs <- df_base |>
     y = max(df_state$lat) + 2
   )
 
-pal <- c("#2c4875", "#8a508f", "#bc5090", "#ff6361", "#ff8531", "#ffa600", "#ffd380")
-pal <- c(NA, colorRampPalette(pal)(12))
-
 distribution_map <- ggplot(data = df_state) +
   geom_polygon(aes(long, lat, group = group), colour = "black", fill = NA, linewidth = 0.1) +
   geom_density2d_filled(data = df_base, aes(slon, slat), alpha = 0.6, contour_var = "count") +
-  geom_text(aes(x, y, label = month), df_base_labs, family = "DM Sans", size = 4, colour = "black") +
-  scale_fill_manual(values = pal, na.value = NA) +
+  geom_text(aes(x, y, label = month), df_base_labs, family = main_font, size = 4, colour = "black") +
+  scale_fill_manual(values = pal_4, na.value = NA) +
   facet_wrap(~month, nrow = 3) +
   coord_map(clip = "off") +
   theme_void() +
   labs(title = "US Tornado Patterns by Month") +
   theme(
-    text = element_text(family = "DM Sans", size = 48, lineheight = 0.3, colour = "black"),
+    text = element_text(family = main_font, size = 48, lineheight = 0.3, colour = "black"),
     plot.background = element_rect(fill = bg, colour = bg),
     plot.caption = element_markdown(colour = txt, hjust = 0.5, margin = margin(t = 20)),
-    #    plot.margin = margin(b = 20, t = 50, r = 50, l = 50),
+    plot.margin = margin(b = 20, t = 50, r = 50, l = 50),
     legend.position = "none",
     strip.text = element_blank(),
     plot.title = element_text(face = "bold", size = 15, hjust = 0.5, margin = margin(b = 20, unit = "pt"))
