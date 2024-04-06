@@ -4,7 +4,6 @@ output: html_document
 date: "2024-04-02"
 ---
 ## Preparing task
-
 Use the library
 ```{r}
 # All packages used in this script:
@@ -84,10 +83,8 @@ theme_1c <- function() {
   ) + 
   theme(
     plot.title = element_text(size = 40, hjust = 0.5),
-    #panel.grid.major.y = element_line(color = "grey80"),
     panel.grid.major.y = element_blank(),
     panel.grid.minor.y = element_blank(),
-    #panel.grid.major.x = element_line(color = "grey80"),
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
     axis.title.x = element_text(size = 40, hjust = 0.5),
@@ -125,8 +122,6 @@ df_base <- tornados %>%
   mutate(
     month = format(date, "%b"),
     month = factor(month, levels = c("Jan", "Apr", "Jul", "Oct", "Feb", "May", "Aug", "Nov", "Mar", "Jun", "Sep", "Dec")),
-    # slat = round(slat,1),
-    # slon = round(slon, 1)
   )
 
 # Create a dataframe for text position
@@ -265,8 +260,8 @@ colors <- c("0-999" = pal[10], "1000-1999" = pal[9], "2000-2999" = pal[7], "3000
 # Create the bubble chart
 bubble_chart <- ggplot(combined_data, aes(x = number_of_fatalities, y = number_of_injuries, size = number_of_tornados, color = tornado_color_factor)) +
   geom_point(alpha = 0.9) +
-  scale_x_continuous(limits = c(0,600), breaks = seq(0,600,100)) +
-  scale_y_continuous(limits = c(0,9500), breaks = seq(0,9500,2000)) +
+  scale_x_continuous(expand = c(0,0), limits = c(0,600), breaks = seq(0,600,100)) +
+  scale_y_continuous(expand = c(0,0), limits = c(0,9500), breaks = seq(0,9500,2000)) +
   scale_size_continuous(name = "Number of tornados", range = c(3,12)) +
   scale_color_manual(values = colors,
                      labels = c("0-999" = "0-999", "1000-1999" = "1000-1999", "2000-2999" = "2000-2999", "3000-3999" = "3000-3999"),
