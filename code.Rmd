@@ -4,6 +4,9 @@ output: html_document
 date: "2024-04-02"
 ---
 ## Preparing task
+
+Delete sth here
+
 Use the library
 ```{r}
 # All packages used in this script:
@@ -48,8 +51,7 @@ pal <- c('#00202e', '#003f5c', '#2c4875', '#8a508f', '#bc5090', '#ff6361', '#ff8
 # Mini Question 1
 ```{r}
 # ADD YOUR CODE
-
-
+data <- tornados
 ```
 
 # Mini Question 2
