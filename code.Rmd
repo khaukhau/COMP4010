@@ -18,8 +18,9 @@ library(showtext)
 library(janitor)
 library(glue)
 library(ggtext)
-#install.packages("maps")
+#install.packages("mapdata")
 library(mapdata)
+#install.packages("biscale")
 library(biscale)
 #install.packages("gridExtra")
 library(gridExtra)
@@ -77,15 +78,15 @@ theme_1c <- function() {
     base_rect_size = 11/22
   ) + 
   theme(
-    plot.title = element_text(size = 40, hjust = 0.5),
+    plot.title = element_text(size = 32, hjust = 0.5),
     panel.grid.major.y = element_blank(),
     panel.grid.minor.y = element_blank(),
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
-    axis.title.x = element_text(size = 40, hjust = 0.5),
-    axis.title.y = element_text(size = 40, hjust = 0.5),
-    axis.text.x = element_text(size = 20),
-    axis.text.y = element_text(size = 24)
+    axis.title.x = element_text(size = 20, hjust = 0.5),
+    axis.title.y = element_text(size = 20, hjust = 0.5),
+    axis.text.x = element_text(size = 12),
+    axis.text.y = element_text(size = 12)
   )
 }
 
@@ -184,10 +185,10 @@ plot_occurrences <- ggplot(yearly_count, aes(x = yr, y = TotalTornadoes)) +
 plot_mag <- ggplot(yearly_summary, aes(x = yr, y = AverageMag)) +
   geom_line(size = 1, color = pal[4]) +
   geom_vline(xintercept = special_year, linetype = 2) +
-  annotate("text", x = 2011, y = 1.2, size = 12, label = "2011 Super Outbreak", angle = 90, vjust = -0.5) +
-  annotate("text", x = 1974, y = 0.8, size = 12, label = "1974 Super Outbreak", angle = 90, vjust = -0.5) +
-  annotate("text", x = 2020, y = 1.2, size = 12, label = "2020 Easter Tornado Outbreak", angle = 90, vjust = -0.5) +
-  labs(title = "Annual Changes in Average Tornado Magnitude",
+  annotate("text", x = 2011, y = 1.2, size = 8, label = "2011 Super Outbreak", angle = 90, vjust = -0.5) +
+  annotate("text", x = 1974, y = 0.8, size = 8, label = "1974 Super Outbreak", angle = 90, vjust = -0.5) +
+  annotate("text", x = 2020, y = 1.2, size = 8, label = "2020 Easter Tornado Outbreak", angle = 90, vjust = -0.5) +
+  labs(title = "Annual Average Tornado Magnitude",
        x = "Year",
        y = "Average Magnitude") +
   theme_1c()
@@ -195,7 +196,7 @@ plot_mag <- ggplot(yearly_summary, aes(x = yr, y = AverageMag)) +
 plot_width <- ggplot(yearly_summary, aes(x = yr, y = AverageWidth)) +
   geom_line(size = 1, color = pal[6]) +
     geom_vline(xintercept = special_year, linetype = 2) +
-  labs(title = "Annual Changes in Average Tornado Width",
+  labs(title = "Annual Median Tornado Width",
        x = "Year",
        y = "Average Width (yards)") +
   theme_1c()
@@ -203,19 +204,26 @@ plot_width <- ggplot(yearly_summary, aes(x = yr, y = AverageWidth)) +
 plot_length <- ggplot(yearly_summary, aes(x = yr, y = AverageLength)) +
   geom_line(size = 1, color = pal[8]) +
   geom_vline(xintercept = special_year, linetype = 2) +
-  labs(title = "Annual Changes in Average Tornado Length",
+  labs(title = "Annual Median Tornado Length",
        x = "Year",
        y = "Average Length (miles)") +
   theme_1c()
 
 # Arranging the plots in a grid
-grid.arrange(plot_occurrences, plot_mag, plot_width, plot_length, ncol = 1)
+grid.arrange(plot_occurrences, plot_mag, plot_width, plot_length, ncol = 2)
 
 # Combine the plots
-combined_plot <- plot_occurrences / plot_mag / plot_width / plot_length 
+#combined_plot <- plot_occurrences / plot_mag / plot_width / plot_length 
+
+# Arranging the plots in a 2x2 grid
+combined_plot <- grid.arrange(plot_occurrences, plot_mag, plot_width, plot_length, ncol = 2)
 
 # Save the combined plot as a single image
-ggsave("combined_plots_2.png", combined_plot, width = 10, height = 15, dpi = 300, bg = "white")
+ggsave("combined_plots_2.png", combined_plot, width = 30, height = 15, dpi = 300, bg = "white")
+
+
+# Save the combined plot as a single image
+#ggsave("combined_plots_2.png", combined_plot, width = 10, height = 15, dpi = 300, bg = "white")
 ```
 
 
