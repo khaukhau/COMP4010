@@ -5,8 +5,6 @@ date: "2024-04-02"
 ---
 ## Preparing task
 
-Delete sth here
-
 Use the library
 ```{r}
 # All packages used in this script:
@@ -17,10 +15,16 @@ library(dplyr)
 library(ggrepel)
 library(readr)
 library(showtext)
+
+#install.packages("janitor")
 library(janitor)
+
 library(glue)
 library(ggtext)
+
+#install.packages("maps")
 library(mapdata)
+
 library(biscale)
 
 #install.packages("gridExtra")
@@ -245,10 +249,6 @@ combined_data <- tornados %>%
   filter(fatality_rate > 0.1, st != "AL") |>
   arrange(desc(fatality_rate)) 
 
-#view(combined_data)
-```
-
-```{r}
 # Add the column to inform the number of tornados range 
 combined_data <- combined_data %>%
   mutate(tornado_color_factor = case_when(
@@ -259,10 +259,6 @@ combined_data <- combined_data %>%
     TRUE ~ "4000+"
   ))
 
-#view(combined_data)
-```
-
-```{r}
 # Choose the color for the tornado range
 colors <- c("0-999" = pal[10], "1000-1999" = pal[9], "2000-2999" = pal[7], "3000-3999" = pal[2], "4000+" = pal[6])
 
@@ -284,7 +280,10 @@ bubble_chart <- ggplot(combined_data, aes(x = number_of_fatalities, y = number_o
     plot.title = element_text(face = "bold"),
     axis.text = element_text(color = "black"),
     panel.grid.major = element_line(color = "#E5E5E5"),
-    panel.grid.minor = element_line(color = "#E5E5E5")
+    panel.grid.minor = element_line(color = "#E5E5E5"),
+    axis.title.x = element_text(face = "bold"),
+    axis.title.y = element_text(face = "bold"),
+    legend.title = element_text(face = "bold")
   ) 
 
 # Display the plot
