@@ -189,7 +189,7 @@ ggsave("combined_plots_2.png", combined_plot, width = 10, height = 15, dpi = 300
 # Mini Question 1
 
 ```{r}
-# Combine operations into one
+# Select the used data for plot 2.1
 combined_data <- tornados %>%
   select(st, om, fat, inj) %>%
   group_by(st) %>%
@@ -204,6 +204,7 @@ combined_data <- tornados %>%
 ```
 
 ```{r}
+# Add the column to inform the number of tornados range 
 combined_data <- combined_data %>%
   mutate(tornado_color_factor = case_when(
     number_of_tornados < 1000  ~ "0-999",
@@ -217,27 +218,28 @@ combined_data <- combined_data %>%
 ```
 
 ```{r}
-
-colors <- c("0-999" = pal[1], "1000-1999" = pal[2], "2000-2999" = pal[3], "3000-3999" = pal[4], "4000+" = pal[5])
+# Choose the color for the tornado range
+colors <- c("0-999" = pal_3[3], "1000-1999" = pal[9], "2000-2999" = pal[7], "3000-3999" = pal[2], "4000+" = pal[6])
 
 # Create the bubble chart
 bubble_chart <- ggplot(combined_data, aes(x = number_of_fatalities, y = number_of_injuries, size = number_of_tornados, color = tornado_color_factor)) +
-  geom_point(alpha = 0.6) +
-  #scale_x_log10() +  
-  #scale_y_log10() + 
+  geom_point(alpha = 0.9) +
   scale_x_continuous(limits = c(0,600), breaks = seq(0,600,100)) +
   scale_y_continuous(limits = c(0,9500), breaks = seq(0,9500,2000)) +
   scale_size_continuous(name = "Number of tornados", range = c(3,12)) +
   scale_color_manual(values = colors,
                      labels = c("0-999" = "0-999", "1000-1999" = "1000-1999", "2000-2999" = "2000-2999", "3000-3999" = "3000-3999"),
                      name = "Tornado Range") + 
-  geom_label_repel(aes(label = st), size = 3, nudge_x = 1, nudge_y = 1, na.rm = TRUE, show.legend = FALSE) + 
+  geom_label_repel(aes(label = st, color = "black"), size = 3, nudge_x = 1, nudge_y = 1, na.rm = TRUE, show.legend = FALSE) + 
   labs(x = "Number of Fatalities", y = "Number of Injuries", title = "Number of Fatalities vs. Number of Injuries") +
   guides(color = guide_legend(override.aes = list(size = 4))) + 
   theme_minimal() +
   theme_1b() +
   theme (
-    #legend.position = ""
+    plot.title = element_text(face = "bold"),
+    axis.text = element_text(color = "black"),
+    panel.grid.major = element_line(color = "#E5E5E5"),
+    panel.grid.minor = element_line(color = "#E5E5E5")
   ) 
 
 # Display the plot
