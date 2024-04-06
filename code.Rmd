@@ -16,18 +16,25 @@ library(ggplot2)
 library(dplyr)
 library(ggrepel)
 library(readr)
+library(showtext)
+library(gridExtra)
+library(patchwork)
 ```
 
 Load the data 
 ```{r}
 tornados <- read_csv("data/tornados.csv")
 
-view(tornados)
+#view(tornados)
 ```
 
 ** Common Utils **
 Create a theme
 ```{r}
+font_add_google("Montserrat", "Montserrat")
+showtext_auto()
+main_font = "Montserrat"
+
 theme_1b <- function() {
   theme(
     plot.title = element_text(hjust = 0.5),
@@ -56,7 +63,7 @@ data <- tornados
 
 # Mini Question 2
 ```{r}
-data_1b <- data.frame(tornado_data)
+data_1b <- data.frame(tornados)
 
 data_1b$mag <- as.numeric(as.character(data_1b$mag))
 
