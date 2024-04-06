@@ -40,6 +40,12 @@ showtext_auto()
 main_font = "Montserrat"
 
 theme_1b <- function() {
+  theme_minimal(
+    base_family = main_font,
+    base_size = 11,
+    base_line_size = 11/22,
+    base_rect_size = 11/22
+  ) + 
   theme(
     plot.title = element_text(hjust = 0.5),
     panel.grid.major.y = element_line(color = "grey80"),
@@ -159,7 +165,7 @@ combined_data <- tornados %>%
   filter(fatality_rate > 0.1, st != "AL") |>
   arrange(desc(fatality_rate)) 
 
-view(combined_data)
+#view(combined_data)
 ```
 
 ```{r}
@@ -172,7 +178,7 @@ combined_data <- combined_data %>%
     TRUE ~ "4000+"
   ))
 
-view(combined_data)
+#view(combined_data)
 ```
 
 ```{r}
