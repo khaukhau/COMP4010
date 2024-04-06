@@ -1,0 +1,121 @@
+---
+title: "Project-1-source-code"
+output: html_document
+date: "2024-04-02"
+---
+Use the library
+```{r}
+# All packages used in this script:
+library(tidyverse)
+library(here)
+library(ggplot2)
+library(dplyr)
+library(ggrepel)
+library(readr)
+```
+
+```{r}
+tornados <- read_csv("data/tornados.csv")
+
+view(tornados)
+```
+
+## Question 1
+
+# Mini Question 1
+```{r}
+# ADD YOUR CODE
+
+
+```
+
+# Mini Question 2
+```{r}
+# ADD YOUR CODE
+
+
+```
+
+## Question 2
+
+# Mini Question 1
+
+```{r}
+# Combine operations into one
+combined_data <- tornados %>%
+  select(st, om, fat, inj) %>%
+  group_by(st) %>%
+  summarise(number_of_tornados = n(),
+            number_of_injuries = sum(inj, na.rm = TRUE),
+            number_of_fatalities = sum(fat, na.rm = TRUE),
+            fatality_rate = number_of_fatalities / number_of_tornados) %>%
+  filter(fatality_rate > 0.1, st != "AL") |>
+  arrange(desc(fatality_rate)) 
+
+view(combined_data)
+```
+
+Create a theme
+```{r}
+theme_1b <- function() {
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    panel.grid.major.y = element_line(color = "grey80"),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.x = element_line(color = "grey80"),
+    panel.grid.minor.x = element_blank(),
+    axis.title.x = element_text(size = 12, hjust = 0.5),
+    axis.title.y = element_text(size = 12, hjust = 0.5),
+  )
+}
+```
+
+```{r}
+combined_data <- combined_data %>%
+  mutate(tornado_color_factor = case_when(
+    number_of_tornados < 1000  ~ "0-999",
+    number_of_tornados >= 1000 & number_of_tornados < 2000 ~ "1000-1999",
+    number_of_tornados >= 2000 & number_of_tornados < 3000 ~ "2000-2999",
+    number_of_tornados >= 3000 & number_of_tornados < 4000 ~ "3000-3999",
+    TRUE ~ "4000+"
+  ))
+
+view(combined_data)
+```
+
+```{r}
+
+colors <- c("0-999" = "lightblue", "1000-1999" = "darkgreen", "2000-2999" = "darkorange", "3000-3999" = "grey", "4000+" = "red")
+
+# Create the bubble chart
+bubble_chart <- ggplot(combined_data, aes(x = number_of_fatalities, y = number_of_injuries, size = number_of_tornados, color = tornado_color_factor)) +
+  geom_point(alpha = 0.6) +
+  #scale_x_log10() +  
+  #scale_y_log10() + 
+  scale_x_continuous(limits = c(0,600), breaks = seq(0,600,100)) +
+  scale_y_continuous(limits = c(0,9500), breaks = seq(0,9500,2000)) +
+  scale_size_continuous(name = "Number of tornados", range = c(3,12)) +
+  scale_color_manual(values = colors,
+                     labels = c("0-999" = "0-999", "1000-1999" = "1000-1999", "2000-2999" = "2000-2999", "3000-3999" = "3000-3999"),
+                     name = "Tornado Range") + 
+  geom_label_repel(aes(label = st), size = 3, nudge_x = 1, nudge_y = 1, na.rm = TRUE, show.legend = FALSE) + 
+  labs(x = "Number of Fatalities", y = "Number of Injuries", title = "Number of Fatalities vs. Number of Injuries") +
+  guides(color = guide_legend(override.aes = list(size = 4))) + 
+  theme_minimal() +
+  theme_1b() +
+  theme (
+    #legend.position = ""
+  ) 
+
+# Display the plot
+bubble_chart
+```
+
+
+## Mini Question 2
+
+```{r}
+# ADD YOUR CODE
+
+
+```
