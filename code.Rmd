@@ -51,25 +51,6 @@ font_add_google("DM Sans", "DM Sans")
 showtext_auto()
 main_font = "DM Sans"
 
-theme_1b <- function() {
-  theme_minimal(
-    base_family = main_font,
-    base_size = 11,
-    base_line_size = 11/22,
-    base_rect_size = 11/22
-  ) + 
-  theme(
-    plot.title = element_text(hjust = 0.5, face = "bold"),
-    panel.grid.major.y = element_line(color = "grey80"),
-    panel.grid.minor.y = element_blank(),
-    panel.grid.major.x = element_line(color = "grey80"),
-    panel.grid.minor.x = element_blank(),
-    axis.title.x = element_text(size = 12, hjust = 0.5, face = "bold"),
-    axis.title.y = element_text(size = 12, hjust = 0.5, face = "bold"),
-    legend.title = element_text(face = "bold")
-  )
-}
-
 theme_1c <- function() {
     theme_minimal(
     base_family = main_font,
