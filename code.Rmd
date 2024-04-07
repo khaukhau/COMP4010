@@ -103,8 +103,8 @@ theme_1d <- function() {
     panel.grid.minor.y = element_blank(),
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank(),
-    axis.title.x = element_text(size = 8, hjust = 0.5),
-    axis.title.y = element_text(size = 8, hjust = 0.5),
+    axis.title.x = element_text(size = 8, hjust = 0.5, face = "bold"),
+    axis.title.y = element_text(size = 8, hjust = 0.5, face = "bold"),
     axis.text.x = element_text(size = 4),
     axis.text.y = element_text(size = 4)
   )
@@ -195,62 +195,6 @@ special_year <- c(1974, 2011, 2020)
 plot_occurrences <- ggplot(yearly_count, aes(x = yr, y = TotalTornadoes)) +
   geom_line(size = 1, color = pal[2]) +
   geom_vline(xintercept = special_year, linetype = 2) +
-  annotate("text", x = 2011, y = 470, size = 6, label = "2011 Super Outbreak", angle = 90, vjust = -0.5) +
-  annotate("text", x = 1974, y = 475, size = 6, label = "1974 Super Outbreak", angle = 90, vjust = -0.5) +
-  annotate("text", x = 2020, y = 620, size = 6, label = "2020 Easter Tornado Outbreak", angle = 90, vjust = -0.5) +
-  labs(title = "Total Yearly Tornado Occurrences",
-       x = "Year",
-       y = "Number of Tornadoes") +
-  theme_1c()
-
-# Creating three separate plots
-plot_mag <- ggplot(yearly_summary, aes(x = yr, y = AverageMag)) +
-  geom_line(size = 1, color = pal[4]) +
-  geom_vline(xintercept = special_year, linetype = 2) +
-  labs(title = "Annual Average Tornado Magnitude",
-       x = "Year",
-       y = "Average Magnitude") +
-  theme_1c()
-
-plot_width <- ggplot(yearly_summary, aes(x = yr, y = AverageWidth)) +
-  geom_line(size = 1, color = pal[6]) +
-    geom_vline(xintercept = special_year, linetype = 2) +
-  labs(title = "Annual Median Tornado Width",
-       x = "Year",
-       y = "Average Width (yards)") +
-  theme_1c()
-
-plot_length <- ggplot(yearly_summary, aes(x = yr, y = AverageLength)) +
-  geom_line(size = 1, color = pal[8]) +
-  geom_vline(xintercept = special_year, linetype = 2) +
-  labs(title = "Annual Median Tornado Length",
-       x = "Year",
-       y = "Average Length (miles)") +
-  theme_1c()
-
-plot_occurrences <- plot_occurrences + theme(plot.margin = margin(5, 12, 12, 5, "mm"))
-plot_mag <- plot_mag + theme(plot.margin = margin(5, 5, 12, 12, "mm"))
-plot_width <- plot_width + theme(plot.margin = margin(12, 12, 5, 5, "mm"))
-plot_length <- plot_length + theme(plot.margin = margin(12, 5, 5, 12, "mm"))
-
-combined_plot <- grid.arrange(
-  plot_occurrences, plot_mag, plot_width, plot_length, 
-  ncol = 2
-)
-
-# Save the combined plot as a single image
-ggsave("combined_plots_2.png", combined_plot, width = 30, height = 15, dpi = 300, bg = "white")
-
-plot_occurrences
-plot_mag
-plot_width
-plot_length
-```
-
-```{r}
-plot_occurrences <- ggplot(yearly_count, aes(x = yr, y = TotalTornadoes)) +
-  geom_line(size = 1, color = pal[2]) +
-  geom_vline(xintercept = special_year, linetype = 2) +
   annotate("text", x = 2011, y = 470, size = 1.5, label = "2011 Super Outbreak", angle = 90, vjust = -0.5) +
   annotate("text", x = 1974, y = 475, size = 1.5, label = "1974 Super Outbreak", angle = 90, vjust = -0.5) +
   annotate("text", x = 2020, y = 620, size = 1.5, label = "2020 Easter Tornado Outbreak", angle = 90, vjust = -0.5) +
@@ -284,23 +228,15 @@ plot_length <- ggplot(yearly_summary, aes(x = yr, y = AverageLength)) +
        y = "Average Length (miles)") +
   theme_1d()
 
-#plot_occurrences <- plot_occurrences + theme(plot.margin = margin(5, 12, 12, 5, "mm"))
-#plot_mag <- plot_mag + theme(plot.margin = margin(5, 5, 12, 12, "mm"))
-#plot_width <- plot_width + theme(plot.margin = margin(12, 12, 5, 5, "mm"))
-#plot_length <- plot_length + theme(plot.margin = margin(12, 5, 5, 12, "mm"))
+plot_occurrences <- plot_occurrences + theme(plot.margin = margin(0, 3, 3, 0, "mm"))
+plot_mag <- plot_mag + theme(plot.margin = margin(0, 0, 3, 3, "mm"))
+plot_width <- plot_width + theme(plot.margin = margin(3, 3, 0, 0, "mm"))
+plot_length <- plot_length + theme(plot.margin = margin(3, 0, 0, 3, "mm"))
 
 combined_plot <- grid.arrange(
   plot_occurrences, plot_mag, plot_width, plot_length, 
   ncol = 2
 )
-
-# Save the combined plot as a single image
-ggsave("combined_plots_3.png", combined_plot, width = 30, height = 15, dpi = 300, bg = "white")
-
-plot_occurrences
-plot_mag
-plot_width
-plot_length
 ```
 
 ## Question 2
