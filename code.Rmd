@@ -343,7 +343,7 @@ economic_impact <- ggplot(data = long_df, aes(x = decade, y = count, fill = cate
     panel.grid.major.x = element_blank(),
     panel.grid.minor.x = element_blank()
   ) +
-  annotate("rect", xmin = 7.5, xmax = 8.5, ymin = -Inf, ymax = Inf, alpha = 0.2) +
+  annotate("rect", xmin = 7.5, xmax = 8.5, ymin = -Inf, ymax = Inf, alpha = 0.1) +
     annotate("text", x = 8, y = 600, label = "Ongoing Decade", size = 4, angle = 90, hjust = 1)
 economic_impact
 ```
