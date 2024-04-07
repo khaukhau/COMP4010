@@ -176,9 +176,9 @@ special_year <- c(1974, 2011, 2020)
 plot_occurrences <- ggplot(yearly_count, aes(x = yr, y = TotalTornadoes)) +
   geom_line(size = 1, color = pal[2]) +
   geom_vline(xintercept = special_year, linetype = 2) +
-  annotate("text", x = 2011, y = 460, size = 6, label = "2011 Super Outbreak", angle = 90, vjust = -0.5) +
-  annotate("text", x = 1974, y = 465, size = 6, label = "1974 Super Outbreak", angle = 90, vjust = -0.5) +
-  annotate("text", x = 2020, y = 600, size = 6, label = "2020 Easter Tornado Outbreak", angle = 90, vjust = -0.5) +
+  annotate("text", x = 2011, y = 470, size = 6, label = "2011 Super Outbreak", angle = 90, vjust = -0.5) +
+  annotate("text", x = 1974, y = 475, size = 6, label = "1974 Super Outbreak", angle = 90, vjust = -0.5) +
+  annotate("text", x = 2020, y = 620, size = 6, label = "2020 Easter Tornado Outbreak", angle = 90, vjust = -0.5) +
   labs(title = "Total Yearly Tornado Occurrences",
        x = "Year",
        y = "Number of Tornadoes") +
