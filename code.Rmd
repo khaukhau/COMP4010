@@ -85,8 +85,8 @@ theme_1d <- function() {
     panel.grid.minor.x = element_blank(),
     axis.title.x = element_text(size = 8, hjust = 0.5, face = "bold"),
     axis.title.y = element_text(size = 8, hjust = 0.5, face = "bold"),
-    axis.text.x = element_text(size = 4),
-    axis.text.y = element_text(size = 4)
+    axis.text.x = element_text(size = 5),
+    axis.text.y = element_text(size = 5)
   )
 }
 ```
@@ -208,10 +208,10 @@ plot_length <- ggplot(yearly_summary, aes(x = yr, y = AverageLength)) +
        y = "Average Length (miles)") +
   theme_1d()
 
-plot_occurrences <- plot_occurrences + theme(plot.margin = margin(0, 3, 3, 0, "mm"))
-plot_mag <- plot_mag + theme(plot.margin = margin(0, 0, 3, 3, "mm"))
-plot_width <- plot_width + theme(plot.margin = margin(3, 3, 0, 0, "mm"))
-plot_length <- plot_length + theme(plot.margin = margin(3, 0, 0, 3, "mm"))
+plot_occurrences <- plot_occurrences + theme(plot.margin = margin(1, 3, 3, 1, "mm"))
+plot_mag <- plot_mag + theme(plot.margin = margin(1, 1, 3, 3, "mm"))
+plot_width <- plot_width + theme(plot.margin = margin(3, 3, 1, 1, "mm"))
+plot_length <- plot_length + theme(plot.margin = margin(3, 1, 1, 3, "mm"))
 
 combined_plot <- grid.arrange(
   plot_occurrences, plot_mag, plot_width, plot_length, 
